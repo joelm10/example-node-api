@@ -20,15 +20,15 @@ const config = {
         port: process.env.port || 4000
     },
     webSocket: {
-        port: procces.env.port || 5000
+        port: process.env.port || 5001
     }
 }
-
-const PORT = process.env.port || 3000;
 
 try {
     restfulApi(app, config.restful);
     graphQLApi(app, config.graphQL);
+    socketApi(app, config.webSocket);
 } catch (e) {
-    console.log(`Eerror starting app:\n${e}`);
+    console.log(`error starting app:\n${e}`);
+    console.trace();
 }

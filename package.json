@@ -19,6 +19,7 @@
   "dependencies": {
     "express": "^4.21.0",
     "graphql": "^16.9.0",
-    "graphql-http": "^1.22.1"
+    "graphql-http": "^1.22.1",
+    "http": "^0.0.1-security"
   }
 }
