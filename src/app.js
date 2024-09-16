@@ -23,11 +23,21 @@ const config = {
         port: process.env.port || 5001
     }
 }
-
+const cmd = process.argv[2];
+console.log('Executing command: ', cmd);
 try {
-    restfulApi(app, config.restful);
-    graphQLApi(app, config.graphQL);
-    socketApi(app, config.webSocket);
+    if (cmd === 'restful') {
+        restfulApi(app, config.restful);
+    } else if (cmd === 'graphql') {
+        graphQLApi(app, config.graphQL);
+
+    } else if (cmd === 'socket') {
+        socketApi(app, config.webSocket);
+    } else {
+        console.error('No server found');
+        process.exit(1);
+    }
+
 } catch (e) {
     console.log(`error starting app:\n${e}`);
     console.trace();

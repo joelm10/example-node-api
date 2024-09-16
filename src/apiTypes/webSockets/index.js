@@ -1,22 +1,49 @@
 const http = require('http');
+const { Server } = require("socket.io");
+const connectionHandlers = require('./connectionHandlers');
+
 
 const socketApi = (app, config) => {
-  const { port } = config;
-  try {
-    // STUB ONLY
-    const server = http.createServer(app);
+    const { port } = config;
+    try {
+        // STUB ONLY
+        const server = http.createServer(app);
+        const io = new Server(server);
 
-    app.get('/', (req, res) => {
-      res.send('<h1>Hello world from the socket</h1>');
-    });
+        const healthCheckResp = {
+            status: 200,
+            ok: true,
+            timestamp: Date.now()
+        }
 
-    server.listen(port, () => {
-      console.log(`listening on *:${port}`);
-    });
+        app.get('/', (req, res) => {
+            res.json(healthCheckResp);
+        });
+        app.get('/status', (req, res) => {
+            res.json(healthCheckResp);
+        });
 
-  } catch (e) {
-    console.log(`socketApi errror:\n${e}`);
-  }
+        // Stub SocketIo connector
+        io.on('connection', (socket) => {
+            // TODO: Add connection logic
+            connectionHandlers('connect', socket);
+
+            socket.on('disconnect', (evt) => {
+                connectionHandlers('disconnect', socket);
+            });
+        });
+
+        // TODO: wire up to simple UI
+        // io.emit('connect', 'test Connect');
+        // io.emit('disconnecct', 'test dis-Connect');
+
+        server.listen(port, () => {
+            console.log(`SocketIo: listening on *:${port}\n\n`);
+        });
+
+    } catch (e) {
+        console.log(`socketApi errror:\n${e}`);
+    }
 
 };
 
