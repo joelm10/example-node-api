@@ -7,9 +7,9 @@ const app = express();
 app.use(express.json());
 
 // api types
-const restfulApi = require('./apiTypes/restful/index.js');
-const graphQLApi = require('./apiTypes/graphQL/index.js');
-const socketApi = require('./apiTypes/webSockets/index.js');
+const restfulApi = require('./services/apiTypes/restful/index.js');
+const graphQLApi = require('./services/apiTypes/graphQL/index.js');
+const socketApi = require('./services/apiTypes/webSockets/index.js');
 
 // Deliberately avoid 3000, as is used by local react dev app
 const config = {

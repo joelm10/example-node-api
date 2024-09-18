@@ -1,6 +1,6 @@
 const http = require('http');
 const { Server } = require("socket.io");
-const connectionHandlers = require('./connectionHandlers');
+const connectionHandlers = require('./common/connectionHandlers');
 
 
 const socketApi = (app, config) => {
@@ -29,13 +29,9 @@ const socketApi = (app, config) => {
             connectionHandlers('connect', socket);
 
             socket.on('disconnect', (evt) => {
-                connectionHandlers('disconnect', socket);
+                connectionHandlers('disconnect', evt);
             });
         });
-
-        // TODO: wire up to simple UI
-        // io.emit('connect', 'test Connect');
-        // io.emit('disconnecct', 'test dis-Connect');
 
         server.listen(port, () => {
             console.log(`SocketIo: listening on *:${port}\n\n`);

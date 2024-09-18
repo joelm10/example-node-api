@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js",
+    "test": "jest test",
+    "coverage": "jest --coverage",
     "restful": "node src/app.js restful",
     "graphql": "node src/app.js graphql",
     "socket": "node src/app.js socket"
@@ -24,6 +26,7 @@
     "graphql": "^16.9.0",
     "graphql-http": "^1.22.1",
     "http": "^0.0.1-security",
+    "jest": "^29.7.0",
     "socket.io": "^4.7.5"
   }
 }
