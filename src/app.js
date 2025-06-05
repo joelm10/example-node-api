@@ -23,8 +23,10 @@ const config = {
         port: process.env.port || 5001
     }
 }
+
 const cmd = process.argv[2];
 console.log('Executing command: ', cmd);
+
 try {
     if (cmd === 'restful') {
         restfulApi(app, config.restful);
@@ -39,6 +41,6 @@ try {
     }
 
 } catch (e) {
-    console.log(`error starting app:\n${e}`);
+    console.log(`Error starting app:\n${e}`);
     console.trace();
 }

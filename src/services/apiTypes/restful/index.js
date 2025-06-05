@@ -6,8 +6,9 @@ const restfulApi = (app, config) => {
     });
 
     app.get('/', (req, res) => {
-        const page = {
 
+        const page = {
+           host: res.host
         };
         res.send(page);
     });
